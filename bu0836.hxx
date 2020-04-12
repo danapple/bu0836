@@ -21,7 +21,7 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <libusb.h>
+#include <libusb-1.0/libusb.h>
 #include <stdint.h>
 #include <vector>
 
@@ -62,6 +62,13 @@ struct usb_hid_descriptor {
 		return libusb_le16_to_cpu(descriptors[n].wDescriptorLength2 << 8
 				| descriptors[n].wDescriptorLength1);
 	}
+    char *usb_strerror(int error_code);
+
+    int LIBUSB_CALL libusb_init(libusb_context **ctx);
+    void LIBUSB_CALL libusb_set_debug(libusb_context *ctx, int level);
+    ssize_t LIBUSB_CALL libusb_get_device_list(libusb_context *ctx,
+                                               libusb_device ***list);
+    void LIBUSB_CALL libusb_exit(libusb_context *ctx);
 };
 
 
@@ -177,11 +184,12 @@ public:
 	bool empty() const { return _devices.empty(); }
 	controller &operator[](unsigned int index) { return *_devices[index]; }
 
+
 private:
 	std::vector<controller *> _devices;
 	controller *_selected;
 
-	static const int _CONTEXT = 0;
+	libusb_context *_CONTEXT;
 };
 
 } // namespace bu0836

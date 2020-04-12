@@ -81,8 +81,8 @@ color bg_white("47");
 
 
 ostream &operator<<(ostream &os, const color &c) {
-	if ((os == cerr && cerr_color) || (os == cout && cout_color))
-		return os << "\033[" << c._color << 'm';
+//	if ((os == cerr && cerr_color) || (os == cout && cout_color))
+//		return os << "\033[" << c._color << 'm';
 	return os;
 }
 

@@ -2,8 +2,8 @@ PREFIX ?= /usr/local
 MANDIR ?= $(PREFIX)/share/man
 INSTALL ?= install
 
-CXXFLAGS ?= -mtune=native -pipe -O3
-CFLAGS ?= -mtune=native -pipe -O3
+CXXFLAGS ?= -g -mtune=native -pipe -O3
+CFLAGS ?= -g -mtune=native -pipe -O3
 LDFLAGS ?= -g
 
 CXXFLAGS += -Wall

@@ -54,7 +54,7 @@ void interrupt_handler(int)
 
 
 
-const char *usb_strerror(int errno)
+const char *usb_strerror(int error_code)
 {
 	switch (errno) {
 	case LIBUSB_SUCCESS:
@@ -456,7 +456,7 @@ int controller::get_encoder_mode(int b) const
 
 manager::manager(int debug_level)
 {
-	int ret = libusb_init(_CONTEXT);
+	int ret = libusb_init(&_CONTEXT);
 	if (ret < 0)
 		throw string("libusb_init: ") + usb_strerror(ret);
 	libusb_set_debug(_CONTEXT, debug_level);
